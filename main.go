@@ -25,7 +25,6 @@ func main() {
 }
 
 func start(c *cli.Context) error {
-	executable := getExecutable()
 	dir := c.Args().First()
 
 	var err error
@@ -44,12 +43,10 @@ func start(c *cli.Context) error {
 		dir = strings.Replace(dir, "~", usr.HomeDir, 1)
 	}
 
-	if executable == "" || dir == "" {
-		return errors.New("empty executable or directory")
+	name := getExec()
+	if name == "" || dir == "" {
+		return errors.New("empty name or directory")
 	}
 
-	cmd := exec.Command(executable, dir)
-	cmd.Start()
-
-	return nil
+	return exec.Command(name, getArgs(dir)...).Start()
 }

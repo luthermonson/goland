@@ -1,8 +1,14 @@
-// +build !windows darwin
+// +build !windows
+// +build !darwin
 
 package main
 
-// todo
-func getExecutable() string {
+func getExec() string {
+	// TODO
 	return ""
+}
+
+func getArgs(dir string) []string {
+	// TODO
+	return []string{}
 }

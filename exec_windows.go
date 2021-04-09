@@ -14,7 +14,7 @@ var (
 	binary  = "\\bin\\goland64.exe"
 )
 
-func getExecutable() string {
+func getExec() string {
 	files, err := ioutil.ReadDir(basedir)
 	if err != nil {
 		log.Fatal(err)
@@ -26,4 +26,8 @@ func getExecutable() string {
 	}
 
 	return ""
+}
+
+func getArgs(dir string) []string {
+	return []string{dir}
 }
