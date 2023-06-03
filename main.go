@@ -13,13 +13,13 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:   "goland",
-		Action: start,
-		Usage:  "",
+		Name:        "goland",
+		Action:      start,
+		Usage:       "",
+		Description: "Open goland easily from the cli",
 	}
 
-	err := app.Run(os.Args)
-	if err != nil {
+	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -38,14 +38,18 @@ func start(c *cli.Context) error {
 	if strings.Contains(dir, "~") {
 		usr, err := user.Current()
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 		dir = strings.Replace(dir, "~", usr.HomeDir, 1)
 	}
 
+	if dir == "" {
+		return errors.New("directory to open is empty, try again")
+	}
+
 	name := getExec()
-	if name == "" || dir == "" {
-		return errors.New("empty name or directory")
+	if name == "" {
+		return errors.New("unable to find goland executable")
 	}
 
 	return exec.Command(name, getArgs(dir)...).Start()

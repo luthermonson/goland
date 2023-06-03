@@ -1,11 +1,12 @@
+//go:build windows
 // +build windows
 
 package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -15,7 +16,7 @@ var (
 )
 
 func getExec() string {
-	files, err := ioutil.ReadDir(basedir)
+	files, err := os.ReadDir(basedir)
 	if err != nil {
 		log.Fatal(err)
 	}

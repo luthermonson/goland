@@ -1,6 +1,5 @@
 # goland cli
-Windows only right now, big todo will be to get this working on MaxOSX and Linux.
-Taking contributions from the motivated...
+Simple command line interface to open goland from a terminal window for a specific directory. Currently works on Windows and MacOSX.
 
 ## Project Opening
 Tool works best when setting the Project Opening setting, default is `Confirm window to open project in`, if you 
