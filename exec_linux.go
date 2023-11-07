@@ -1,14 +1,11 @@
-// +build !windows
-// +build !darwin
-
 package main
 
+// TODO
 func getExec() string {
-	// TODO
 	return ""
 }
 
+// TODO
 func getArgs(dir string) []string {
-	// TODO
 	return []string{}
 }

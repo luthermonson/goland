@@ -2,37 +2,33 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
 	"os/user"
 	"strings"
-
-	"github.com/urfave/cli/v2"
 )
 
 func main() {
-	app := &cli.App{
-		Name:        "goland",
-		Action:      start,
-		Usage:       "",
-		Description: "Open goland easily from the cli",
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
+	if err := run(); err != nil {
+		log.Fatalf("error starting goland: %s", err)
 	}
 }
 
-func start(c *cli.Context) error {
-	dir := c.Args().First()
+func run() error {
+	var dir string
+	if len(os.Args) > 1 {
+		dir = os.Args[1]
+	}
 
-	var err error
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
 	if dir == "" {
-		dir, err = os.Getwd()
-		if err != nil {
-			return err
-		}
+		dir = cwd
 	}
 
 	if strings.Contains(dir, "~") {
@@ -41,6 +37,10 @@ func start(c *cli.Context) error {
 			return err
 		}
 		dir = strings.Replace(dir, "~", usr.HomeDir, 1)
+	}
+
+	if !strings.HasPrefix(dir, string(os.PathSeparator)) {
+		dir = fmt.Sprintf("%s%s%s", cwd, string(os.PathSeparator), dir)
 	}
 
 	if dir == "" {
@@ -52,5 +52,6 @@ func start(c *cli.Context) error {
 		return errors.New("unable to find goland executable")
 	}
 
+	fmt.Println(getArgs(dir))
 	return exec.Command(name, getArgs(dir)...).Start()
 }

@@ -1,5 +1,3 @@
-// +build darwin
-
 package main
 
 func getExec() string {
