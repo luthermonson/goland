@@ -39,10 +39,9 @@ func run() error {
 		dir = strings.Replace(dir, "~", usr.HomeDir, 1)
 	}
 
-	if !strings.HasPrefix(dir, string(os.PathSeparator)) {
+	if !strings.HasPrefix(dir, root) {
 		dir = fmt.Sprintf("%s%s%s", cwd, string(os.PathSeparator), dir)
 	}
-
 	if dir == "" {
 		return errors.New("directory to open is empty, try again")
 	}

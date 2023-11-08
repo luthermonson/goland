@@ -1,5 +1,9 @@
 package main
 
+import "os"
+
+var root = string(os.PathSeparator)
+
 // TODO
 func getExec() string {
 	return ""

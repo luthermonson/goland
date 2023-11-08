@@ -1,5 +1,7 @@
 package main
 
+var root = string(os.PathSeparator)
+
 func getExec() string {
 	return "open"
 }

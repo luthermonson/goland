@@ -8,6 +8,7 @@ import (
 )
 
 var (
+	root    = "C:" + string(os.PathSeparator)
 	basedir = "C:\\Program Files\\JetBrains\\"
 	binary  = "\\bin\\goland64.exe"
 )
