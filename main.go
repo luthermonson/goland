@@ -51,6 +51,5 @@ func run() error {
 		return errors.New("unable to find goland executable")
 	}
 
-	fmt.Println(getArgs(dir))
 	return exec.Command(name, getArgs(dir)...).Start()
 }
